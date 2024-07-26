@@ -53,45 +53,10 @@
 
             
     <div class="gyat">
-        <input type="text" id="searchInput" placeholder="Enter your search query" aria-label="Search Query" />
-        <button onclick="search()">Search</button>
-        <iframe id="resultFrame" class="loading"></iframe>
-    </div>
-
-    <script>
-        document.getElementById('searchInput').addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                search();
-            }
-        });
-
-        async function search() {
-            const query = document.getElementById('searchInput').value.trim();
-            if (query) {
-                const encodedQuery = encodeURIComponent(query);
-                const proxyURL = `https://api.allorigins.win/raw?url=https://www.google.com/search?q=${encodedQuery}`;
-                const frame = document.getElementById('resultFrame');
-                frame.classList.add('loading');
-                try {
-                    const response = await fetch(proxyURL);
-                    if (response.ok) {
-                        const html = await response.text();
-                        const blob = new Blob([html], { type: 'text/html' });
-                        frame.src = URL.createObjectURL(blob);
-                        frame.onload = function() {
-                            frame.classList.remove('loading');
-                        };
-                    } else {
-                        throw new Error('Network response was not ok.');
-                    }
-                } catch (error) {
-                    frame.classList.remove('loading');
-                    console.error('Error during search:', error); // Log error to console for debugging
-                    alert('Failed to load the search results: ' + error.message);
-                }
-            }
-        }
-    </script>
+         <form id="uv-form"">
+            <input id="uv-search-engine" value="https://www.google.com/search?q=%s" type="hidden"/> 
+            <input id="uv-address" type="text" placeholder="Search Google or type an URL" class="form__input"/>
+          </form>
        <a href="https://discord.gg/yYFyg3c3r2"> 
   <img src="logodiscord.png" alt=“discord” width=70 height=70> 
            <a href="https://github.com/gdg-network/green-dog-group-v2"> 
